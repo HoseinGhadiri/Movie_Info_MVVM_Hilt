@@ -10,7 +10,13 @@ import javax.inject.Inject
  */
 class ApiHelperImpl @Inject constructor(private val apiService: ApiService) : ApiHelper {
 
-    override suspend fun search(name: String): Response<SearchResponse> =  apiService.search(name)
+    override suspend fun search(name: String): Response<SearchResponse> =
+        apiService.search("25e10ff8bf8377dfb3ba9c7cb993991f",
+            "en-US",
+            name,
+            "1",
+            "false"
+    )
 
     override suspend fun details(id: Int): Response<GetDetailsResponse> = apiService.details(id)
 }
