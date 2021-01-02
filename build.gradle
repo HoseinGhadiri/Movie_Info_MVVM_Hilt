@@ -4,10 +4,12 @@ buildscript {
         kotlin_version = "1.4.21"
         gradle_version = '4.1.1'
         hilt_version = '2.28-alpha'
+        coroutines_version = "1.2.0-alpha"
         compileSdkVersion = 30
         targetSdkVersion = 30
         buildToolsVersion = "30.0.3"
         minSdkVersion = 17
+
 
         versions = [
                 sdk                       : [min: 17, compile: 30],
