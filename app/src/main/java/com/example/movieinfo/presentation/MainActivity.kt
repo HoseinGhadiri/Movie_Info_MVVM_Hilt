@@ -1,7 +1,8 @@
-package com.example.movieinfo
+package com.example.movieinfo.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.movieinfo.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
