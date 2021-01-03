@@ -16,3 +16,8 @@ data class Movie(
     val vote_average: Double,
     val vote_count: Int
 )
+
+data class Keyword(
+    val id: Int,
+    val name: String
+)

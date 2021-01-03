@@ -6,7 +6,7 @@ import com.example.core.interactors.SearchMovie
 /**
  * Created by Hosein on 1/2/2021.
  */
-data class Interactors (
+ data class Interactions (
     val getMovieInfo: GetMovieInfo,
     val searchMovie: SearchMovie
-        )
+ )

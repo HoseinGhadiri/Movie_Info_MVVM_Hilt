@@ -5,15 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.domain.Movie
 import com.example.movieinfo.framework.network.GetDetailsResponse
 import com.example.movieinfo.framework.network.Resource
 import com.example.movieinfo.framework.network.SearchResponse
 import com.example.movieinfo.framework.repository.MainRepository
 import com.example.movieinfo.framework.utils.NetworkHelper
 import com.example.movieinfo.framework.utils.Utils
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import kotlinx.coroutines.launch
 
 /**
@@ -32,6 +29,7 @@ class MainViewModel @ViewModelInject constructor(
         get() = _movieDetails
 
     fun search(name: String) {
+
         viewModelScope.launch {
             _movies.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
