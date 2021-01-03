@@ -14,9 +14,9 @@ class ApiHelperImpl @Inject constructor(private val apiService: ApiService) : Ap
         apiService.search("25e10ff8bf8377dfb3ba9c7cb993991f",
             "en-US",
             name,
-            "1",
-            "false"
+            "1"
     )
 
-    override suspend fun details(id: Int): Response<GetDetailsResponse> = apiService.details(id)
+    override suspend fun details(id: Int): Response<GetDetailsResponse> = apiService.details(id,
+        "25e10ff8bf8377dfb3ba9c7cb993991f")
 }

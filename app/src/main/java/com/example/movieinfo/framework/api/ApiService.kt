@@ -12,17 +12,14 @@ import retrofit2.http.Query
  */
 interface ApiService {
 
-//    @GET("api/{name}")
-//    @GET("search/movie?api_key=25e10ff8bf8377dfb3ba9c7cb993991f&language=en-US&query={name}&page=1&include_adult=false")
     @GET("search/movie?")
     suspend fun search(@Query("api_key") apiKey: String,
                        @Query("language") language : String,
                        @Query("query") name : String,
                        @Query("page") page : String,
-                       @Query("include_adult") include_adult : String,
                        ): Response<SearchResponse>
-//    suspend fun search(@Query("name") movieName: String): Response<SearchResponse>
 
-    @GET("api/{id}")
-    suspend fun details(@Path("id") movieId: Int): Response<GetDetailsResponse>
+    @GET("movie/{id}/keywords?")
+    suspend fun details(@Path("id") movieId: Int,
+                        @Query("api_key") apiKey: String): Response<GetDetailsResponse>
 }

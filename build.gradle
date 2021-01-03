@@ -30,6 +30,7 @@ buildscript {
                 rxandroid                 : "2.1.1",
                 rxkotlin                  : "2.3.0",
                 topsnackbar               : "1.1.1",
+                glide                     : "4.11.0",
         ]
     }
     repositories {

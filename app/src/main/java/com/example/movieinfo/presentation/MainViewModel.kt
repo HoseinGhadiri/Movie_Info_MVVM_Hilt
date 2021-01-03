@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.Movie
+import com.example.movieinfo.framework.network.GetDetailsResponse
 import com.example.movieinfo.framework.network.Resource
 import com.example.movieinfo.framework.network.SearchResponse
 import com.example.movieinfo.framework.repository.MainRepository
@@ -23,28 +24,40 @@ class MainViewModel @ViewModelInject constructor(
     private val networkHelper: NetworkHelper
 ) : ViewModel() {
 
-    val gson: Gson = GsonBuilder().serializeNulls().create()
-//    private val _movies = MutableLiveData<List<Movie>>()
     private val _movies = MutableLiveData<Resource<SearchResponse>>()
-    private val _loading = MutableLiveData<Resource<List<Movie>>>()
+    private val _movieDetails = MutableLiveData<Resource<GetDetailsResponse>>()
     val movies: LiveData<Resource<SearchResponse>>
         get() = _movies
+    val movieDetails: LiveData<Resource<GetDetailsResponse>>
+        get() = _movieDetails
 
-    val loading: LiveData<Resource<List<Movie>>>
-        get() = _loading
-
-    public fun search(name: String) {
+    fun search(name: String) {
         viewModelScope.launch {
-            _loading.postValue(Resource.loading(null))
+            _movies.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 mainRepository.search(name).let {
                     if (it.isSuccessful) {
                         Utils.log("bodyyy = " + it.body().toString())
 
                         _movies.postValue(Resource.success(it.body()))
-                    } else _loading.postValue(Resource.error(it.errorBody().toString(), null))
+                    } else _movies.postValue(Resource.error(it.errorBody().toString(), null))
                 }
-            } else _loading.postValue(Resource.error("No internet connection", null))
+            } else _movies.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    fun getDetails(id: Int) {
+        viewModelScope.launch {
+            _movieDetails.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                mainRepository.details(id).let {
+                    if (it.isSuccessful) {
+                        Utils.log("bodyyy = " + it.body().toString())
+
+                        _movieDetails.postValue(Resource.success(it.body()))
+                    } else _movieDetails.postValue(Resource.error(it.errorBody().toString(), null))
+                }
+            } else _movieDetails.postValue(Resource.error("No internet connection", null))
         }
     }
 }
